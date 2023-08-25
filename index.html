@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Preloader by ShahrukMaharuj</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <style>
+      .block {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+      }
+
+      .loader-text-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #e6302d;
+      }
+
+      .loader-text {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.5em;
+        color: #fff;
+      }
+
+      .loader-text .letter {
+        display: inline-block;
+        line-height: 1em;
+      }
+
+      .revealer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #fece63;
+      }
+
+      .pre-loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #e6302d;
+      }
+
+      .loader-wrapper {
+        position: relative;
+        width: 250px;
+        height: 250px;
+        background: rgb(240, 240, 240);
+        border-radius: 100%;
+        overflow: hidden;
+      }
+
+      .loader-text-wrapper img {
+        max-width: 100%;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .loader {
+        position: relative; /* Change from absolute to relative */
+        width: 100%;
+        height: 100%;
+        background: rgb(254, 206, 99);
+        background: linear-gradient(
+          180deg,
+          rgba(254, 206, 99, 1) 0%,
+          rgb(255, 174, 0) 100%
+        );
+      }
+
+      .loader img {
+        width: 50%; /* Adjust as needed */
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loader-text-wrapper block">
+      <img
+        src="http://localhost:10094/wp-content/uploads/2023/08/disputesmediation.svg"
+        alt=""
+      />
+    </div>
+    <div class="revealer"></div>
+    <div class="pre-loader block">
+      <div class="loader-wrapper">
+        <div class="loader"><img src="mediation.svg" alt="" /></div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <script>
+      var imageWrapper = document.querySelector(".loader-text-wrapper img");
+
+      anime.timeline().add({
+        targets: imageWrapper,
+        opacity: [0, 1],
+        easing: "easeOutExpo",
+        duration: 1200,
+        delay: 2400,
+      });
+
+      gsap.from(".loader-wrapper", 2, {
+        scale: 0.8,
+        ease: "power1.inOut",
+      });
+
+      gsap.from(".loader", 2, {
+        top: "100%",
+        ease: "power3.inOut",
+      });
+
+      gsap.to(
+        ".loader-wrapper, .pre-loader",
+        1,
+        {
+          scale: 1.5,
+          opacity: 0,
+          display: "none",
+          ease: "power3.inOut",
+          delay: 2,
+        },
+        "-=1"
+      );
+
+      gsap.from(".revealer", 1, {
+        width: "0%",
+        ease: "power3.inOut",
+        delay: 3,
+      });
+
+      gsap.to(".revealer", 0.8, {
+        left: "100%",
+        ease: "power3.inOut",
+        delay: 4,
+      });
+
+      gsap.to(".loader-text-wrapper", 0.2, {
+        opacity: 0,
+        display: "none",
+        ease: "power3.inOut",
+        delay: 4,
+      });
+    </script>
+  </body>
+</html>
